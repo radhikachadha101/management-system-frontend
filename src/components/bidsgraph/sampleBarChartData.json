@@ -1,0 +1,33 @@
+{
+    "labels": [
+      "current week"
+    ],
+    "datasets": [
+      {
+        "data": [
+          2
+        ],
+        "label": [
+          "rex"
+        ],
+        "backgroundColor": [
+          "rgba(73,46,124, 0.5)",
+          "rgba(51,133,200, 0.5)"
+        ],
+        "stack": 1
+      },
+      {
+        "data": [
+          1
+        ],
+        "label": [
+          "ray"
+        ],
+        "backgroundColor": [
+          "rgba(253,198,22, 0.5)",
+          "rgba(19,241,141, 0.5)"
+        ],
+        "stack": 1
+      }
+    ]
+  }

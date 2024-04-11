@@ -1,0 +1,19 @@
+[
+    {
+      "name": "open",
+      "value": 1
+    },
+    {
+      "name": "close"
+    },
+    {
+      "name": "pending"
+    },
+    {
+      "name": "submitted",
+      "value": 2
+    },
+    {
+      "name": "hired"
+    }
+  ]

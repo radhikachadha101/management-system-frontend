@@ -1,0 +1,176 @@
+.make-entry-row{
+    display: flex;
+    border: 1px solid #C6D2D9;
+    height: 60px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    >div{
+        border-right:1px solid #C6D2D9;
+        align-items: center;
+        display: flex;
+    }
+
+    .make-billable{
+        width: 43px
+
+    }
+    .make-select-project{
+     width: 300px;
+     justify-content: center;
+     select{
+         &:focus{
+             background-image: none;
+             background-color: transparent;
+         }
+     }
+    
+    }
+}
+
+
+
+.entries-wrapper {
+         
+    // Task entry header css begin here
+
+    .entries-header{
+        background: rgba(34, 47, 185, 0.1); 
+        height: 35px;
+        border: 1px solid #C6D2D9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        font-weight: 600;
+        font-size: 16px;
+        .entry-header-info{            
+            display: flex;
+            div{
+                margin-right: 30px;
+                
+                &:last-child{
+                    margin: 0;
+                }
+                span{
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+     // Task entry header css end here
+    
+
+
+     // Task entry header css begin here
+.entries-row{
+    display: flex;
+    border: 1px solid #C6D2D9;
+    border-top:none;
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    font-family: 'maven_promedium';
+    color: rgba(0, 0, 0, 0.54);
+    div{
+        display: flex;
+        align-items: center;
+        border-right: 1px solid #C6D2D9;
+        padding: 0 5px;
+        &:last-child{
+            border: none;
+        }
+    }
+
+    .task-state{
+        background-color: red;      
+        width: 62px;      
+    }
+
+    .task-income{
+        width: 2%;
+        width: 62px;
+    }
+
+    .project-name{
+        width: 450px;
+        
+
+        p{
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            margin: 0
+        }
+    }
+
+    .task-desc{
+        width: 100%;
+        position: relative;
+        padding: 0 25px 0 5px;
+        cursor: pointer;
+        
+         p{
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            margin: 0;
+        }
+        .tesk-edit {
+            position: absolute;
+            right: 5px;
+        }
+    }
+
+    .start-time{
+        width: 10%;
+    }
+    .end-time{
+      
+        width: 10%;
+    }
+    .task-date{
+        width:13%;
+    }
+    .task-duration {
+        width: 130px;
+        justify-content: center;
+        h6{
+            font-weight: bold;
+            color: black;
+            font-size: 17px;
+            margin: 0;
+        }
+
+
+    }
+    .cmt-btn{
+        width: 100px;
+        padding: 0;
+        border: none;
+        
+            button{
+                border: none!important;
+                background-color: transparent!important;
+                &:hover{
+
+                }
+                
+                &:focus {
+                    outline: none!important;
+                    background-color: transparent!important;
+                }
+           
+        }
+    }
+
+
+    .entry-more{
+        
+    }
+
+}
+
+
+
+}
