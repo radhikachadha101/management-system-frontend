@@ -59,10 +59,8 @@ function DisplayUser({ history, addUser, userActionPerformed, getUser, user,upda
       };
 
     useEffect(() => {
-
         getUser(id);
-
-    }, [getUser, id])
+    }, [])
     useEffect(() => {
         getRoles();
       }, [getRoles])
@@ -72,7 +70,10 @@ function DisplayUser({ history, addUser, userActionPerformed, getUser, user,upda
             setFirstName(user.firstName);
             setLastName(user.lastName);
             setEmail(user.email);
-            setType(user && user.userId ? user.userId.map(group => group.userGroupId ) : []);  
+            if (user && Array.isArray(user.userId)) {
+                setType(user && user.userId ? user.userId.map(group => group.userGroupId ) : []); 
+            }
+            
             setSubmit(false);
             if(user.active){
                 setChecked({checked: true })
@@ -83,6 +84,7 @@ function DisplayUser({ history, addUser, userActionPerformed, getUser, user,upda
         }
     }, [user])
 
+    
 
     useEffect(() => {
         if (editUser) {

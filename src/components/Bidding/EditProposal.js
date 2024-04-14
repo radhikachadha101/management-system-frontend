@@ -160,8 +160,6 @@ if (poposalDeleted == true) {
   const getName = (option, withUsername) =>
   `${option.skill ? option.skill : ""}`;
 
-  console.log("selectedDate ",selectedDate)
-
   const handleSubmit = (data) => {
     setSubmit(true);
     if (proposalName && profileId && rate && channeltype && proposaltype && jobUrl) {

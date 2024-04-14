@@ -6,9 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Paper from '@material-ui/core/Paper';
-import { Alert } from '@material-ui/lab';
-import { AlertTitle } from '@material-ui/lab';
+import Paper from "@material-ui/core/Paper";
+import { Alert } from "@material-ui/lab";
+import { AlertTitle } from "@material-ui/lab";
 import getConnect from "../Common/connect";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -20,19 +20,18 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 // import AdapterDateFns from '@mui/x-date-pickers/AdapterDateFns';
 
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
+import FileUpload from "./FileUpload";
+import Chip from "@material-ui/core/Chip";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useNavigate } from "react-router-dom";
 
-import FileUpload from './FileUpload';
-import Chip from '@material-ui/core/Chip';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { useNavigate } from 'react-router-dom';
-
-import './style.css';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import "./style.css";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker, TimePicker } from '@mui/lab';
-import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 
 // import TextField from '@mui/material/TextField';
 import {
@@ -74,7 +73,8 @@ function CreateProposal({
   proposalType,
   bidProfiles,
   profiles,
-  input, meta 
+  input,
+  meta,
 }) {
   const getName = (option, withUsername) =>
     `${option.skill ? option.skill : ""}`;
@@ -91,22 +91,19 @@ function CreateProposal({
   const [description, setDescription] = useState("");
   // const [editorState, setEditorState] = useState( () => EditorState.createEmpty());
   const [proposalLink, setProposalLink] = useState("");
-  const [jobUrl, setJobUrl] = useState("")
+  const [jobUrl, setJobUrl] = useState("");
   const [rate, setRate] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-
   const handleDateChange = (date) => {
-      setSelectedDate(date);
+    setSelectedDate(date);
   };
-  
-  
 
   useEffect(() => {
     if (proposalAdded) {
       navigate("/proposals");
     }
-  }, [proposalAdded])
+  }, [proposalAdded]);
 
   const [filterUsers, setFilterUsers] = useState([]);
   useEffect(() => {
@@ -115,7 +112,7 @@ function CreateProposal({
     getChannels();
     getProposalType();
     bidProfiles();
-  }, [getSkills, getBidStatus, getChannels,getProposalType,bidProfiles]);
+  }, [getSkills, getBidStatus, getChannels, getProposalType, bidProfiles]);
 
   useEffect(() => {
     if (skills && skills.length) {
@@ -126,7 +123,7 @@ function CreateProposal({
   const handleSubmit = (data) => {
     setSubmit(true);
     if (proposalName && profileId && rate && channeltype && proposaltype) {
-      let skillData = skill.map(a => a.id);
+      let skillData = skill.map((a) => a.id);
       data.append("name", proposalName);
       data.append("profileId", profileId);
       data.append("channelId", channeltype);
@@ -137,21 +134,24 @@ function CreateProposal({
       data.append("jobUrl", jobUrl);
       data.append("rate", rate);
       data.append("proposalDate", selectedDate);
-      data.append('skill',JSON.stringify(skillData));
+      data.append("skill", JSON.stringify(skillData));
 
-      
-
-     let payload =  {
-       name:proposalName, profileId:profileId,
-       channelId:channeltype, proposalTypeId:proposaltype,
-       statusId:bidType,description:description,
-       proposalLink:proposalLink,rate:rate,proposalDate:selectedDate, jobUrl:jobUrl };
-      payload['skill']= skill.map(a => a.id);
-      addProposal(data)
+      let payload = {
+        name: proposalName,
+        profileId: profileId,
+        channelId: channeltype,
+        proposalTypeId: proposaltype,
+        statusId: bidType,
+        description: description,
+        proposalLink: proposalLink,
+        rate: rate,
+        proposalDate: selectedDate,
+        jobUrl: jobUrl,
+      };
+      payload["skill"] = skill.map((a) => a.id);
+      addProposal(data);
     }
   };
-
-  
 
   return (
     <Container component="main" maxWidth="md">
@@ -162,9 +162,9 @@ function CreateProposal({
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <TextField
-              type="url"
+                type="url"
                 variant="outlined"
                 required
                 fullWidth
@@ -173,15 +173,20 @@ function CreateProposal({
                 name="jobUrl"
                 autoFocus
                 autoComplete="jobUrl"
-                onChange={(e) => { 
+                onChange={(e) => {
                   setRate(e.target.value);
                   const amount = e.target.value;
-                  if (!amount || amount.match(/(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/)) {
-                      setJobUrl(e.target.value); // Set job URL here if the condition passes
+                  if (
+                    !amount ||
+                    amount.match(
+                      /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/
+                    )
+                  ) {
+                    setJobUrl(e.target.value); // Set job URL here if the condition passes
                   } else {
-                      alert("Enter only URL");  
+                    alert("Enter only URL");
                   }
-              }}              
+                }}
                 value={jobUrl}
                 error={submit && !jobUrl}
               />
@@ -201,31 +206,26 @@ function CreateProposal({
                 error={submit && !proposalName}
               />
             </Grid>
-<Grid item xs={12}>
-            <div className="App">
+            <Grid item xs={12}>
+              <div className="App">
                 <h6>Description</h6>
                 <CKEditor
-                    editor={ ClassicEditor }
-                    data=""
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        setDescription(data);
-                    } }
-                    onBlur={ ( event, editor ) => {
-                    } }
-                    onFocus={ ( event, editor ) => {
-                    } }
+                  editor={ClassicEditor}
+                  data=""
+                  onReady={(editor) => {
+                    // You can store the "editor" and use when it is needed.
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setDescription(data);
+                  }}
+                  onBlur={(event, editor) => {}}
+                  onFocus={(event, editor) => {}}
                 />
-            </div>
+              </div>
             </Grid>
 
-
-           
             <Grid item xs={12}>
-
               <FormControl
                 fullWidth
                 variant="outlined"
@@ -254,8 +254,6 @@ function CreateProposal({
                     : null}
                 </Select>
               </FormControl>
-
-
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -282,11 +280,11 @@ function CreateProposal({
                   required
                   labelId="type-user"
                   id="typeUserId"
-                    value={proposaltype}
+                  value={proposaltype}
                   fullWidth
-                    onChange={e => setProposalType(e.target.value)}
+                  onChange={(e) => setProposalType(e.target.value)}
                   label="Proposal type"
-                    error={submit && !proposaltype}
+                  error={submit && !proposaltype}
                 >
                   <MenuItem value="-1">
                     <em>None</em>
@@ -298,8 +296,6 @@ function CreateProposal({
                         </MenuItem>
                       ))
                     : null}
-
-                  
                 </Select>
               </FormControl>
             </Grid>
@@ -313,11 +309,12 @@ function CreateProposal({
                 type="text"
                 id="rate"
                 autoComplete="current-password"
-                onChange={(e) =>{ const amount = e.target.value;
+                onChange={(e) => {
+                  const amount = e.target.value;
                   if (!amount || amount.match(/^\d{1,}(\d{0,4})?$/)) {
-                  setRate(e.target.value) }
-                  else {
-                    alert("Enter number value only");                    
+                    setRate(e.target.value);
+                  } else {
+                    alert("Enter number value only");
                   }
                 }}
                 value={rate}
@@ -325,13 +322,13 @@ function CreateProposal({
               />
             </Grid>
             <Grid item xs={12}>
-            <Autocomplete
+              <Autocomplete
                 multiple
                 id="skills"
                 name="skills"
                 options={filterUsers}
                 getOptionLabel={(option) => getName(option, false)}
-                value={skill?skill:[]}
+                value={skill ? skill : []}
                 onChange={(e, n) => setSkills(n)}
                 filterSelectedOptions
                 renderInput={(params) => (
@@ -347,64 +344,17 @@ function CreateProposal({
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-  <TextField
-    label="Proposal date"
-    type="date"
-    value={selectedDate.toISOString().split('T')[0]}
-    format="MM/dd/yyyy"
-    onChange={(e) => handleDateChange(new Date(e.target.value))}
-    InputLabelProps={{
-      shrink: true,
-    }}
-  />
-</Grid>
-
-            {/* <Grid item xs={12} sm={12}> */}
-              hghgdgtdgfsdgfsffdsgsg
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Grid item xs={12} sm={12}>
-        <DatePicker
-          label="Proposal date"
-          value={selectedDate}
-          onChange={(date) => handleDateChange(date)}
-          renderInput={(props) => <TextField {...props} />}
-          inputFormat="MM/dd/yyyy"
-        />
-        <TimePicker
-          label="Proposal Time"
-          value={selectedDate}
-          onChange={(date) => handleDateChange(date)}
-          renderInput={(props) => <TextField {...props} />}
-        />
-      </Grid>
-    </LocalizationProvider> */}
-
-              
-            {/* <MuiPickersUtilsProvider utils={AdapterDateFns}>
-  <KeyboardDatePicker
-    margin="normal"
-    id="date-picker-dialog"
-    label="Proposal date"
-    format="MM/dd/yyyy"
-    value={selectedDate}
-    onChange={(date) => handleDateChange(date)}
-    KeyboardButtonProps={{
-      "aria-label": "change date",
-    }}
-  />
-  <KeyboardTimePicker
-    margin="normal"
-    id="time-picker"
-    label="Proposal Time"
-    value={selectedDate}
-    onChange={(date) => handleDateChange(date)}
-    KeyboardButtonProps={{
-      "aria-label": "change time",
-    }}
-  />
-</MuiPickersUtilsProvider> */}
- 
-            {/* </Grid> */}
+              <TextField
+                label="Proposal date"
+                type="date"
+                value={selectedDate.toISOString().split("T")[0]}
+                format="MM/dd/yyyy"
+                onChange={(e) => handleDateChange(new Date(e.target.value))}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
             <Grid item xs={12}>
               <FormControl
                 fullWidth
@@ -437,11 +387,14 @@ function CreateProposal({
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <br/>
+            <br />
             <h4>Upload Documents </h4>
-          <FileUpload  handleSubmit={handleSubmit} fromRequest = "create" proposalDetail={null}/>
+            <FileUpload
+              handleSubmit={handleSubmit}
+              fromRequest="create"
+              proposalDetail={null}
+            />
           </Grid>
-          
         </form>
       </div>
     </Container>

@@ -194,7 +194,6 @@ if(token) {
 
   //Logic to transform the userProposalsData into specific structure expected by recharts barcharts - https://www.chartjs.org/docs/latest/charts/bar.html#dataset-properties
   // Refer to ./sampleBarChartData.json for the required structure for barcharts
-  console.log("userProposalsData", userProposalsData)
   
   // let datasets = userProposalsData.map(user => {
   //   let chartDataItem = {
@@ -247,15 +246,11 @@ if(token) {
 //   datasets: datasets
 // };
 
-//   console.log("barChartData ", barChartData)
-
 
 const data = userProposalsData.map(user => ({
   x: user.userInfo.firstName, // Use user's first name as x value
   y: user.userProposal, // Use user's proposal value as y value
 }));
-
-console.log("data ",data)
 
   //Logic to prepare pie chart data start ---------------------
 

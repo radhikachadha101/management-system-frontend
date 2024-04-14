@@ -17,7 +17,6 @@ export function login(payload) {
     };
 }
 export function register(payload) {
-    // console.log("loginnnnnnnnnn ",process.env.API);
     return dispatch => {
         axios
             .post(`${api}signup`, payload)
