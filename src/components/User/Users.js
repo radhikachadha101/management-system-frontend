@@ -92,7 +92,7 @@ function Users({getUsers, users, deleteUser, getRoles, roles, getUser, user, res
   useEffect(() => {
     getUsers(offset, limit, search);
     getRoles();
-  }, [getUsers, getRoles, resetUserPassword])
+  }, [getUsers, getRoles])
 
 
   useEffect(() => {
@@ -111,30 +111,23 @@ function Users({getUsers, users, deleteUser, getRoles, roles, getUser, user, res
   useEffect(()=>{
     if(Object.entries(user).length > 0){
     setEmail(user.email)
-    setResetUserCredential(true)
     }
   },[user])
 
-  useEffect(()=>{
-    if(resetUserCredential){
-    userCredential()
-    }
-  },[resetUserCredential])
-
-
   const prepareCredential = async (id) => {
+    setParamId(id)
     await getUser(id)
+    setResetUserCredential(true)
   }
 
-  const userCredential = () => {
-    if(email ){
-      setParamId(id)
-      resetUserPassword(user.id, { password })
-      var credentials = "username:" + email + "/password:" + password
+  useEffect(() => {
+    if (email && resetUserCredential) {
+      resetUserPassword(user.id, { password });
+      var credentials = "username:" + email + "/password:" + password;
       copy(credentials);
-      setResetUserCredential(false)
+      setResetUserCredential(false);
     }
-  }
+  }, [email, resetUserCredential]);
 
   const handelDelete = (id) => {
     deleteUser(id);
